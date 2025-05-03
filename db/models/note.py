@@ -11,13 +11,15 @@ class Note(Base):
     content = mapped_column(String(200))
     is_done = mapped_column(Boolean, default=False)
     created_at = mapped_column(TIMESTAMP, server_default=func.now())
+    updated_at = mapped_column(TIMESTAMP, server_default=func.now(), server_onupdate=func.now())
 
     def to_dict(self):
         return {
             "id": self.id,
             "content": self.content,
             "is_done": self.is_done,
-            "created_at": self.created_at
+            "created_at": self.created_at,
+            "updated_at": self.updated_at
         }
     
     @validates("content")

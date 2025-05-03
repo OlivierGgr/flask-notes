@@ -24,7 +24,8 @@ def upgrade() -> None:
         Column("id", INTEGER, primary_key=True),
         Column("content", VARCHAR(160)),
         Column("is_done", BOOLEAN, default=False),
-        Column('created_at', TIMESTAMP, server_default=func.now())
+        Column('created_at', TIMESTAMP, server_default=func.now()),
+        Column('updated_at', TIMESTAMP, server_default=func.now(), server_onupdate=func.now())
     )
 
 

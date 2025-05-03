@@ -1,4 +1,4 @@
-from infrastructure.init_db import db
+from extensions import db
 
 # metadata pour Alembic
 metadata = db.metadata

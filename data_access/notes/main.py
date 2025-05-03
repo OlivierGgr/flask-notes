@@ -1,4 +1,6 @@
 from flask import current_app, jsonify
+from sqlalchemy import func
+
 from db.models.note import Note
 from extensions import db
 import logging
@@ -57,6 +59,8 @@ def delete_note(id):
 def put_note(id, updated_content):
     with current_app.app_context():
         try:
+            updated_content["updated_at"] = func.now()
+
             update_statement = db.update(Note).where(Note.id == id).values(updated_content)
             db.session.execute(update_statement)
             db.session.commit()
